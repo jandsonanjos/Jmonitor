@@ -5,6 +5,7 @@ const WebSocket = require('ws');
 const app = express();
 const PORT = 3000;
 
+app.use(express.static('public'))
 app.get('/api/containers', async (req, res) => {
     try {
         const containers = await getContainers()
@@ -48,17 +49,15 @@ wss.on('connection', (ws) => {
         } catch (error) {
             console.error('Error fetching container data:', error)
         }
+    }
           const interval = setInterval(sendStats, 2000)
           sendStats() // envia imediatamente na conexão, sem esperar 2s
-            ws.on('close', () => {
-            clearInterval(interval)
-            console.log('Client disconnected')
-    })
-    }
+          ws.on('close', () => {
+                clearInterval(interval)
+                console.log('Client disconnected')
+    })   
 
-    
 })
     server.listen(PORT, () => {
         console.log(`Monitor rodando em http://localhost:${PORT}`)
-
 })

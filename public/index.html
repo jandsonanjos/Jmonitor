@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Container Monitor</title>
+</head>
+<body>
+  <h1>Containers</h1>
+  <div id="containers"></div>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:3000')
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      const containerElements = data.map((container) => `
+        <div>
+          <h2>${container.name}</h2>
+          <p>Memory: ${container.stats.memory_mb} MB</p>
+          <p>CPU: ${container.stats.cpu_percent}%</p>
+        </div>
+      `).join('')
+      document.getElementById('containers').innerHTML = containerElements
+    }
+  </script>
+</body>
+</html>
