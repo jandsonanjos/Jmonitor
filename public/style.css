@@ -10,8 +10,17 @@
       --text: #e2e8f0;
       --muted: #64748b;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 24px; }
     h1 { font-size: 18px; margin-bottom: 20px; color: var(--blue); }
     #containers { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
     .container-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+/* status colors */
+    .container-card.green { border-left: 3px solid var(--green); }
+    .container-card.yellow { border-left: 3px solid var(--yellow); }
+    .container-card.red { border-left: 3px solid var(--red); }
+
+    .badge.green { background: rgba(34,211,160,0.15); color: var(--green); }
+    .badge.yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .badge.red { background: rgba(244,63,94,0.15); color: var(--red); }

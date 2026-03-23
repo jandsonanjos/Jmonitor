@@ -8,26 +8,34 @@
   <h1>Containers</h1>
   <div id="containers"></div>
 
-  <script>
+  <script> 
+    function getStateColor(state){
+        if(state === 'running') return 'green'
+        if(state === 'paused') return 'yellow'
+        return 'red' //exited, dead, etc
+    }
+
+    
+
     const ws = new WebSocket('ws://localhost:3000')
     
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data)
       const containerElements = data.map((container) => {
-  // variáveis ficam aqui, antes do return
-  const memPercent = Math.min(
-    (container.stats.memory_mb / container.stats.memory_limit_mb) * 100,
-    100
-  ).toFixed(1)
+      const color = getStateColor(container.state)
+      const memPercent = Math.min(
+        (container.stats.memory_mb / container.stats.memory_limit_mb) * 100,
+        100
+    ).toFixed(1)
 
   return  `
-            <div class="container-card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="badge running"></span>
-                    <span class="container-name">${container.name}</span>
+            <div class="container-card ${color}">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="badge ${color}">${container.state}</span>
+                        <span class="container-name">${container.name}</span>
                 </div>
-            <span class="container-id">${container.id.slice(0,12)}</span>
+                <span class="container-id">${container.id.slice(0,12)}</span>
             </div>
 
             <div class="metrics">
