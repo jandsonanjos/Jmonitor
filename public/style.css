@@ -11,6 +11,33 @@
       --muted: #64748b;
     }
 
+    /*navbar*/
+    ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+ul li {
+  float: left;
+}
+
+ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  background-color: #111111;
+}
+/*navbar end*/
+
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 24px; }
     h1 { font-size: 18px; margin-bottom: 20px; color: var(--blue); }

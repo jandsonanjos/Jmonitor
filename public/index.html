@@ -5,8 +5,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Containers</h1>
-  <div id="containers"></div>
+    <div id="containers"></div>
+        <h1>Containers</h1>
+        <ul>
+            <li><a href="default.asp">Monitoramento</a></li>
+            <li><a href="news.asp">Containers apagados</a></li>
+            <li><a href="contact.asp">Logs de containers Geral</a></li>
+        </ul>
 
   <script> 
     function getStateColor(state){
@@ -14,8 +19,6 @@
         if(state === 'paused') return 'yellow'
         return 'red' //exited, dead, etc
     }
-
-    
 
     const ws = new WebSocket('ws://localhost:3000')
     
