@@ -14,6 +14,8 @@ app.get('/api/containers', async (req, res) => {
             return {
                 id: container.Id,
                 name: container.Names[0].replace(/^\//, ''), // Remove leading slash
+                state: container.State,
+                status: container.Status,
                 stats: formatStats(rawStats)
             }
         })
@@ -40,6 +42,8 @@ wss.on('connection', (ws) => {
                 return {
                     id: container.Id,
                     name: container.Names[0].replace(/^\//, ''), // Remove leading slash
+                    state: container.State, // this is states technical to container 
+                    status: container.Status,
                     stats: formatStats(rawStats)
                 }
             })

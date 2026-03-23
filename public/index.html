@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Container Monitor</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Containers</h1>
@@ -12,13 +13,52 @@
     
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data)
-      const containerElements = data.map((container) => `
-        <div>
-          <h2>${container.name}</h2>
-          <p>Memory: ${container.stats.memory_mb} MB</p>
-          <p>CPU: ${container.stats.cpu_percent}%</p>
-        </div>
-      `).join('')
+      const containerElements = data.map((container) => {
+  // variáveis ficam aqui, antes do return
+  const memPercent = Math.min(
+    (container.stats.memory_mb / container.stats.memory_limit_mb) * 100,
+    100
+  ).toFixed(1)
+
+  return  `
+            <div class="container-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="badge running"></span>
+                    <span class="container-name">${container.name}</span>
+                </div>
+            <span class="container-id">${container.id.slice(0,12)}</span>
+            </div>
+
+            <div class="metrics">
+                <div class="metric">
+                <div class="metric-header">
+                    <label>CPU</label>
+                    <span>${container.stats.cpu_percent}%</span>
+            </div>
+        
+            <div class="bar">  
+                <div class="bar-fill cpu" style="width:${container.stats.cpu_percent}%"></div>
+                    </div>
+                        </div>
+                            <div class="metric">
+                        <div class="metric-header">
+                                <label>Memória</label>
+                                <span>${container.stats.memory_mb} MB</span>
+                        </div>
+                            <div class="bar">
+                                <div class="bar-fill mem" style="width:${memPercent}%"></div>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-restart" onclick="restartContainer('${container.id}')">↺ Restart</button>
+                    <button class="btn-stop" onclick="stopContainer('${container.id}')">⬛ Stop</button>
+                </div>
+            </div>
+        `
+    }).join('')
       document.getElementById('containers').innerHTML = containerElements
     }
   </script>

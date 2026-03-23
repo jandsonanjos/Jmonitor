@@ -1,0 +1,17 @@
+
+    :root {
+      --bg: #0d0f12;
+      --card: #141720;
+      --border: rgba(255,255,255,0.07);
+      --green: #22d3a0;
+      --yellow: #f59e0b;
+      --red: #f43f5e;
+      --blue: #78eb43;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 24px; }
+    h1 { font-size: 18px; margin-bottom: 20px; color: var(--blue); }
+    #containers { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .container-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }

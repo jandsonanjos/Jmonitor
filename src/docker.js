@@ -31,7 +31,8 @@ function formatStats(rawStats) {
     const cpu_percent = (cpuDelta / sysDelta) * cores * 100
 
     return{
-        memory_mb: Math.round(rawStats.memory_stats.usage / 1024 / 1024 * 100) / 100, //container convertendo para MB,
+        memory_mb: Math.round(rawStats.memory_stats.usage / 1024 / 1024 * 100) / 100,
+        memory_limit_mb: Math.round(rawStats.memory_stats.limit / 1024 / 1024),
         cpu_percent: Math.round(cpu_percent * 100) / 100
 
     }
